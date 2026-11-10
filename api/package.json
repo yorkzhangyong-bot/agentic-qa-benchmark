@@ -9,8 +9,7 @@
     "start": "node --env-file-if-exists=.env .output/server/index.mjs",
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
-    "db:seed": "tsx prisma/seed.ts",
-    "test": "bun test"
+    "db:seed": "tsx prisma/seed.ts"
   },
   "devDependencies": {
     "@ngneat/falso": "^5.0.0",

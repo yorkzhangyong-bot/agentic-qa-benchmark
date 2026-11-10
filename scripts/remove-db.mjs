@@ -1,19 +1,9 @@
 // Deletes the API's SQLite database file (and any journal files) so `npm run db:reset` starts clean.
-// Uses DATABASE_URL if set (file: URLs only, relative to api/), otherwise api/dev.db.
 import { existsSync, rmSync } from 'node:fs';
-import { relative, resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { relative } from 'node:path';
+import { databaseFile } from './db-file.mjs';
 
-const apiDir = fileURLToPath(new URL('../api/', import.meta.url));
-const url = process.env.DATABASE_URL ?? 'file:./dev.db';
-
-if (!url.startsWith('file:')) {
-  console.error(`DATABASE_URL must be a file: URL for SQLite, got "${url}".`);
-  process.exit(1);
-}
-
-const dbPath = resolve(apiDir, url.slice('file:'.length));
-const display = relative(process.cwd(), dbPath) || dbPath;
+const dbPath = databaseFile();
 
 for (const file of [dbPath, `${dbPath}-journal`, `${dbPath}-wal`, `${dbPath}-shm`]) {
   if (!existsSync(file)) continue;
@@ -27,4 +17,4 @@ for (const file of [dbPath, `${dbPath}-journal`, `${dbPath}-wal`, `${dbPath}-shm
     throw error;
   }
 }
-console.log(`Removed ${display} (if it existed).`);
+console.log(`Removed ${relative(process.cwd(), dbPath)} (if it existed).`);

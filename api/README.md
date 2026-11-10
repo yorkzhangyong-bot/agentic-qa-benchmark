@@ -15,6 +15,5 @@ The backend of the Conduit benchmark app: the RealWorld REST API under `/api`, o
 
 - Routes live in `server/routes/api/` (file-based routing). The schema is `prisma/schema.prisma` and the database is `dev.db` (git-ignored).
 - `.env` (git-ignored) must define `JWT_SECRET`. Optional: `DATABASE_URL`, `BCRYPT_SALT_ROUNDS`, `PORT`.
-- `npm test` still runs `bun test`: the upstream unit tests import `bun:test` and haven't been ported.
 
 Vendored from [realworld-apps/nitro-prisma-zod-realworld-example-app](https://github.com/realworld-apps/nitro-prisma-zod-realworld-example-app) at commit 428056b. See [NOTICE](../NOTICE) and [LICENSE](LICENSE).

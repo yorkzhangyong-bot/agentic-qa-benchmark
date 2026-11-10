@@ -1,8 +1,8 @@
 Conduit benchmark app - third-party notices
 ============================================
 
-This repository vendors code and assets from three MIT-licensed projects of the RealWorld
-organisation (https://github.com/realworld-apps). Each licence file sits next to the code it covers.
+This repository vendors code and assets from the projects below. Each licence file sits next to
+the files it covers.
 
 1. api/ - RealWorld backend (Nitro + Prisma + Zod)
    Source:    https://github.com/realworld-apps/nitro-prisma-zod-realworld-example-app
@@ -17,13 +17,36 @@ organisation (https://github.com/realworld-apps). Each licence file sits next to
    Licence:   MIT, see web/LICENSE. The Angular logo (web/logo.png) is a trademark of Google LLC
               and is not covered by the MIT License (see the notice in web/LICENSE).
 
-3. web/src/theme/ - the Conduit stylesheet (styles.css) and two images (media/conduit-logo.svg,
-   media/default-avatar.svg) from the RealWorld project repository. Upstream, the Angular app
-   loaded them through a git submodule; only these three files are vendored here.
+3. web/src/theme/conduit/ - the Conduit stylesheet (styles.css) and two images
+   (media/conduit-logo.svg, media/default-avatar.svg) from the RealWorld project repository.
+   Upstream, the Angular app loaded them through a git submodule; only these files are vendored.
    Source:    https://github.com/realworld-apps/realworld
    Commit:    25588846c314b15a5e427ffe816e6b4af7be68c7 (the submodule commit pinned by both apps)
    Copyright: (c) 2021 Thinkster, (c) 2026 c4ffein
-   Licence:   MIT, see web/src/theme/LICENSE
+   Licence:   MIT, see web/src/theme/conduit/LICENSE
+
+4. web/src/theme/ionicons/ - Ionicons 2.0.1 (css/ionicons.min.css and the icon font in fonts/),
+   as served by https://code.ionicframework.com/ionicons/2.0.1/, which the app used to load.
+   Project:   https://github.com/ionic-team/ionicons (licence taken from tag v2.0.1)
+   Copyright: (c) 2014 Drifty (http://drifty.com/)
+   Licence:   MIT, see web/src/theme/ionicons/LICENSE. As stated in the stylesheet header, the
+              Android-style icons were originally built by Google's Material Design Icons
+              (https://github.com/google/material-design-icons) and are used under CC BY 4.0
+              (http://creativecommons.org/licenses/by/4.0/).
+
+5. web/src/theme/fonts/ - web fonts served by Google Fonts, which the app used to load from
+   https://fonts.googleapis.com (fetched 2026-11-10). The woff2 files are unmodified; only the
+   URLs in fonts.css were changed to point at them.
+   - Titillium Web (700): Copyright (c) 2009-2011 by Accademia di Belle Arti di Urbino and students
+     of MA course of Visual design.
+     SIL Open Font License 1.1, see web/src/theme/fonts/titillium-web/OFL.txt
+   - Lora (400, 400 italic, 700, 700 italic): Copyright 2011 The Lora Project Authors
+     (https://github.com/cyrealtype/Lora-Cyrillic), with Reserved Font Name "Lora".
+     SIL Open Font License 1.1, see web/src/theme/fonts/lora/OFL.txt
+   - Source Sans Pro (300, 400, 600, 700 and their italics): Copyright 2010, 2012, 2014 Adobe
+     Systems Incorporated (http://www.adobe.com/), with Reserved Font Name 'Source'.
+     SIL Open Font License 1.1, see web/src/theme/fonts/source-sans-pro/OFL.txt (taken from
+     github.com/google/fonts before the family was delisted there in 2023)
 
 Changes made in this repository
 -------------------------------
@@ -33,13 +56,15 @@ api/
 - Loads the libsql native addon in the main process so `nitro dev` keeps answering after
   server-file reloads on Windows.
 - Added a deterministic seed script (prisma/seed.ts) and the db:seed script.
-- Removed the Bun lockfile, Makefile, CI workflows and the git submodule.
+- Removed the upstream unit tests, the Bun lockfile, Makefile, CI workflows and the git submodule.
 
 web/
 - Calls the local API (http://localhost:3000/api) instead of the hosted demo API.
-- Removed the window.__conduit_debug__ test hook, the end-to-end test configuration and
-  scripts, Playwright, git-hook tooling (husky, lint-staged), Angular CLI analytics, the Bun
-  lockfile, CLAUDE.md, CI workflows and the git submodule.
-- Global styles and images come from web/src/theme/ instead of the submodule.
+- Loads icons and fonts from web/src/theme/ instead of public CDNs, and its global styles and
+  images from web/src/theme/conduit/ instead of the submodule.
+- Removed the window.__conduit_debug__ test hook, the upstream unit tests and their tooling
+  (Vitest, jsdom, test setup), the end-to-end test configuration and scripts, Playwright,
+  git-hook tooling (husky, lint-staged), Angular CLI analytics, the Bun lockfile, CLAUDE.md,
+  CI workflows and the git submodule.
 
 Both READMEs were rewritten for this repository.

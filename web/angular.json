@@ -23,7 +23,7 @@
               "src/favicon.ico",
               {
                 "glob": "*.svg",
-                "input": "src/theme/media",
+                "input": "src/theme/conduit/media",
                 "output": "/assets"
               },
               {
@@ -32,7 +32,11 @@
                 "output": "/"
               }
             ],
-            "styles": ["src/theme/styles.css"],
+            "styles": [
+              "src/theme/ionicons/css/ionicons.min.css",
+              "src/theme/fonts/fonts.css",
+              "src/theme/conduit/styles.css"
+            ],
             "scripts": [],
             "browser": "src/main.ts"
           },

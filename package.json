@@ -10,7 +10,7 @@
     "node": ">=22.12"
   },
   "scripts": {
-    "setup": "npm install && node scripts/ensure-env.mjs && npm run db:generate -w api && npm run db:push -w api",
+    "setup": "npm install && node scripts/ensure-env.mjs && npm run db:generate -w api && node scripts/setup-db.mjs",
     "dev": "concurrently --kill-others --names api,web --prefix-colors cyan,magenta \"npm run dev -w api\" \"npm run start -w web\"",
     "build": "npm run db:generate -w api && npm run build -w api && npm run build -w web",
     "start": "concurrently --kill-others --names api,web --prefix-colors cyan,magenta \"npm run start -w api\" \"serve --single --no-clipboard --listen 4200 web/dist/angular-conduit/browser\"",

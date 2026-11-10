@@ -9,8 +9,11 @@ The frontend of the Conduit benchmark app: an Angular single-page app on port 42
 | `start` | `ng serve` on :4200, with reload |
 | `build` | Production build into `dist/angular-conduit/browser` |
 | `format`, `format:check` | Prettier |
-| `test` | Vitest unit tests. They currently fail to start: `src/test-setup.ts` imports `zone.js`, which upstream no longer installs. |
 
-Global styles and images are in `src/theme/`, vendored from the RealWorld project (MIT, see `src/theme/LICENSE`). Icons and fonts load from CDNs in `src/index.html`.
+Everything the UI loads is local, in `src/theme/`, each folder with its own licence:
+
+- `conduit/`: the Conduit stylesheet and images from the RealWorld project (MIT).
+- `ionicons/`: the Ionicons 2.0.1 icon font (MIT).
+- `fonts/`: Titillium Web, Lora and Source Sans Pro from Google Fonts (SIL Open Font License 1.1).
 
 Vendored from [realworld-apps/angular-realworld-example-app](https://github.com/realworld-apps/angular-realworld-example-app) at commit d426ec8. See [NOTICE](../NOTICE) and [LICENSE](LICENSE).
