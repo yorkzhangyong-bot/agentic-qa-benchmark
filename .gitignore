@@ -1,0 +1,13 @@
+# Dependencies (npm workspaces install into the root node_modules)
+node_modules/
+
+# SQLite side files (api/.gitignore already ignores dev.db, .env, generated/, .output/ and .nitro/;
+# web/.gitignore ignores dist/)
+*.db-journal
+*.db-wal
+*.db-shm
+
+# Logs and OS files
+*.log
+.DS_Store
+Thumbs.db

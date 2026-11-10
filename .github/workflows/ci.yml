@@ -1,0 +1,45 @@
+name: CI
+
+# Checks that the app builds, starts and answers on Ubuntu. No tests yet.
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-start:
+    name: Build, start and answer /api/tags
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Set up env, Prisma client and SQLite schema
+        run: npm run setup
+
+      - name: Build
+        run: npm run build
+
+      - name: Start the app
+        run: npm start > app.log 2>&1 &
+
+      - name: API answers /api/tags
+        run: curl --fail --silent --show-error --retry 30 --retry-delay 2 --retry-connrefused http://localhost:3000/api/tags
+
+      - name: Web app is served
+        run: curl --fail --silent --show-error --retry 30 --retry-delay 2 --retry-connrefused http://localhost:4200/ | grep -q "<app-root"
+
+      - name: App log
+        if: always()
+        run: cat app.log || true

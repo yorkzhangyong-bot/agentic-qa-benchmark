@@ -1,0 +1,23 @@
+{
+  "name": "agentic-qa-benchmark",
+  "private": true,
+  "description": "Conduit (RealWorld) app used as the system under test for evaluating an agentic QA platform",
+  "workspaces": [
+    "api",
+    "web"
+  ],
+  "engines": {
+    "node": ">=22.12"
+  },
+  "scripts": {
+    "setup": "npm install && node scripts/ensure-env.mjs && npm run db:generate -w api && npm run db:push -w api",
+    "dev": "concurrently --kill-others --names api,web --prefix-colors cyan,magenta \"npm run dev -w api\" \"npm run start -w web\"",
+    "build": "npm run db:generate -w api && npm run build -w api && npm run build -w web",
+    "start": "concurrently --kill-others --names api,web --prefix-colors cyan,magenta \"npm run start -w api\" \"serve --single --no-clipboard --listen 4200 web/dist/angular-conduit/browser\"",
+    "db:reset": "node scripts/remove-db.mjs && npm run db:push -w api && npm run db:seed -w api"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.7",
+    "serve": "^14.2.7"
+  }
+}
