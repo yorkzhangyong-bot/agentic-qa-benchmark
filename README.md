@@ -50,7 +50,7 @@ Every seeded user has the password **`Password123!`**.
 | bob | bob@example.com | bio and avatar | 6 | alice | Feed of 12 articles (2 pages) |
 | carol | carol@example.com | bio, no avatar | 4 | alice, bob | Feed of 18 articles (2 pages) |
 | dave | dave@example.com | no bio, no avatar | 2 | alice, bob, carol | Feed of 22 articles (3 pages) |
-| erin | erin@example.com | bio, no avatar | 0 | nobody | Empty feed; 11 favourites (2 pages on her Favorited Articles tab) |
+| erin | erin@example.com | bio, no avatar | 0 | nobody | Empty feed; 11 favourites (2 pages on her Favorited Posts tab) |
 
 The seed data is identical every time it is loaded:
 
