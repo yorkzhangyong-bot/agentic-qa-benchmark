@@ -167,7 +167,7 @@ When a user submits a form with bad input, the app tells them what is wrong, kee
 - A username or password made only of spaces enables the "Sign up" button but is rejected with "can't be blank".
 - Every save in the editor gives the article a new address, even when the title is unchanged.
 - Emptying a field while editing an article reports "<field> String must contain at least 1 character(s)", while creating an article with an empty field reports "<field> can't be blank".
-- Article previews list tags alphabetically; the article page lists them in the order they were added.
+- Article previews list tags alphabetically; the order of tags on the article page and in the editor is not specified.
 - A page number past the last page (for example `/?page=9`) shows "No articles are here... yet." and the page buttons "1", "2" and "3", none of them highlighted.
 - An article unfavourited from the "Favorited Posts" tab stays in that list, with an outlined heart, until the page is reloaded.
 - A tag typed twice in the editor is added once.
@@ -244,7 +244,7 @@ When a user submits a form with bad input, the app tells them what is wrong, kee
 
 **Article page**
 
-- **FR-042**: The article page (`/article/<slug>`) MUST show the title as the heading, the author's avatar, username and publication date, the body rendered from Markdown, and the article's tags in the order they were added. Example: "Flaky tests: a field guide" by alice, January 9, 2026, with the tags "testing", "automation" and "ci".
+- **FR-042**: The article page (`/article/<slug>`) MUST show the title as the heading, the author's avatar, username and publication date, the body rendered from Markdown, and all of the article's tags, in any order. Example: "Flaky tests: a field guide" by alice, January 9, 2026, with the tags "testing", "automation" and "ci".
 - **FR-043**: Article bodies MUST be rendered as Markdown. Example: "Markdown cheat sheet for Conduit authors" shows the section headings "Headings", "Lists", "Code" and "Quotes and links", a bulleted list, a numbered list, a code block, the quote "Quality is never an accident." and a "home page" link to `/`.
 - **FR-044**: HTML script tags in an article body MUST NOT be run, while the rest of the body is still rendered (for example, `**bold**` appears in bold).
 - **FR-045**: The author MUST see "Edit Article" and "Delete Article" twice on their own article's page: under the title and below the body. Everyone else, signed in or not, MUST see "Follow <author>" (or "Unfollow <author>") and "Favorite Article (<count>)" (or "Unfavorite Article (<count>)") in both places instead. Example: signed out, "Flaky tests: a field guide" shows "Follow alice" and "Favorite Article (4)".
@@ -255,7 +255,7 @@ When a user submits a form with bad input, the app tells them what is wrong, kee
 - **FR-048**: Typing a tag and pressing Enter MUST add it as a tag below the field and empty the field. A tag already in the list or made only of spaces is not added again, clicking the × next to a tag removes it, and text left in the tag field when publishing is added as a tag.
 - **FR-049**: "Publish Article" MUST create the article and open its page at `/article/<slug>`, where the slug is the title with spaces replaced by hyphens, then a hyphen and 8 random characters (for example `Zebra-tags-test-ee1a5998`). The article is then first in the Global Feed and in the author's "My Posts" tab.
 - **FR-050**: Publishing with an empty title, description or body MUST show one message per empty field, out of "title can't be blank", "description can't be blank" and "body can't be blank", stay on `/editor` and create no article.
-- **FR-051**: "Edit Article" MUST open `/editor/<slug>` with the title, description, body and tags (in the order they were added) filled in.
+- **FR-051**: "Edit Article" MUST open `/editor/<slug>` with the title, description, body and tags (in any order) filled in.
 - **FR-052**: "Publish Article" in the editor for an existing article MUST save the changes and open the article page showing them. Every save MUST give the article a new address: the slug keeps the title part and gets 8 new random characters, even when the title is unchanged.
 - **FR-053**: Emptying the title, description or body of an existing article and clicking "Publish Article" MUST show one message per emptied field, in the form "title String must contain at least 1 character(s)", and stay in the editor without saving.
 - **FR-054**: Opening the editor for another user's article (`/editor/<their slug>`) MUST open the home page instead.
@@ -335,5 +335,6 @@ The current app, as taken from upstream, also behaves as follows. This is noted 
 
 - A sign-up or settings change that reuses another account's username or email address currently shows both "email has already been taken" and "username has already been taken", even when only one of them is taken.
 - Comments currently load oldest first, while a newly posted comment is added at the top of the list, so after a reload it moves to the bottom.
+- On the article page and in the editor, tags currently aren't always in the order they were added: an article given the tags "zebra" and then "testing" shows "testing" first. They aren't alphabetical either: "Flaky tests: a field guide" shows "testing", "automation" and "ci".
 - After an article is edited, its old address currently shows only the header and footer.
 - A missing article (such as `/article/does-not-exist` or a deleted article's address) and a missing profile (such as `/profile/nobody`) currently show only the header and footer, without an error message. So do an unknown address (such as `/no-such-page`) and `/login` or `/register` opened while signed in, whose addresses also change to `/`.

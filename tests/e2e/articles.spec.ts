@@ -44,8 +44,10 @@ test.describe('Article authoring', () => {
 
     await expect(page).toHaveURL(new RegExp(`/article/Zebra-tags-test-${runId}-[A-Za-z0-9]{8}$`));
     await expect(article.title).toHaveText(title);
-    // Tag order comes from the database relation; both tags must be shown.
-    await expect(article.tagItems).toHaveText([/testing/, /zebra/]);
+    // Both tags must be shown; their order is not specified (FR-042).
+    await expect(article.tagItems).toHaveCount(2);
+    await expect(article.tagItems.filter({ hasText: 'zebra' })).toHaveCount(1);
+    await expect(article.tagItems.filter({ hasText: 'testing' })).toHaveCount(1);
 
     await home.goto('/');
     await expect(home.previews.getByRole('heading').first()).toHaveText(title);
