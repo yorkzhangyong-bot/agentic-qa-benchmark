@@ -62,7 +62,10 @@ test.describe('Journeys', () => {
     await editor.addTag('beta');
     await editor.publish();
     await expect(article.title).toHaveText(title);
-    await expect(article.tagItems).toHaveText([/alpha/, /beta/]);
+    // Both tags must be shown; their order is not specified (FR-042).
+    await expect(article.tagItems).toHaveCount(2);
+    await expect(article.tagItems.filter({ hasText: 'alpha' })).toHaveCount(1);
+    await expect(article.tagItems.filter({ hasText: 'beta' })).toHaveCount(1);
     const slug = new URL(page.url()).pathname.split('/').pop()!;
 
     // First in the Global Feed.

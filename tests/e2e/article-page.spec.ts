@@ -23,7 +23,11 @@ test.describe('Article page', () => {
       '/profile/alice',
     );
     await expect(article.date).toHaveText('January 9, 2026');
-    await expect(article.tagItems).toHaveText(['testing', 'automation', 'ci']);
+    // All three tags must be shown; their order is not specified (FR-042).
+    await expect(article.tagItems).toHaveCount(3);
+    await expect(article.tagItems.filter({ hasText: 'testing' })).toHaveCount(1);
+    await expect(article.tagItems.filter({ hasText: 'automation' })).toHaveCount(1);
+    await expect(article.tagItems.filter({ hasText: 'ci' })).toHaveCount(1);
 
     await expect(article.comments).toHaveCount(2);
     await expect(article.commentsBy('bob')).toHaveCount(1);

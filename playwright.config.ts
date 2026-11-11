@@ -9,8 +9,9 @@ export default defineConfig({
   retries: isCI ? 1 : 0,
   reporter: isCI ? [['junit'], ['list']] : [['list'], ['html', { open: 'never' }]],
   use: {
-    // The agentic QA workflows export APP_URL and BASE_URL; locally the app runs on :4200.
-    baseURL: process.env.APP_URL ?? process.env.BASE_URL ?? 'http://localhost:4200',
+    // The agentic QA workflows set APP_URL; locally the app runs on :4200. BASE_URL is deliberately not
+    // read: other tools set it for their own purposes.
+    baseURL: process.env.APP_URL || 'http://localhost:4200',
     trace: isCI ? 'retain-on-failure' : 'on',
   },
   projects: [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }],

@@ -115,7 +115,10 @@ test.describe('Article authoring', () => {
     await expect(editor.titleInput).toHaveValue('Page objects or not?');
     await expect(editor.descriptionInput).toHaveValue('Structuring UI tests so they survive redesigns');
     await expect(editor.bodyInput).toHaveValue(/Page objects help when many tests share the same screens/);
-    await expect(editor.tagChips).toHaveText(['testing', 'playwright']);
+    // Both tags must be filled in; their order is not specified (FR-051).
+    await expect(editor.tagChips).toHaveCount(2);
+    await expect(editor.tagChip('testing')).toHaveCount(1);
+    await expect(editor.tagChip('playwright')).toHaveCount(1);
   });
 
   test('47. edit title saves and changes slug [FR-052]', async ({ page }) => {
