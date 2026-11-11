@@ -11,3 +11,11 @@ node_modules/
 *.log
 .DS_Store
 Thumbs.db
+
+# Playwright output
+test-results/
+playwright-report/
+blob-report/
+
+# Agentic QA platform run output (the workflows also keep it out of git)
+/results/

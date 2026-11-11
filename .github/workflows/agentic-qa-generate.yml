@@ -1,0 +1,33 @@
+name: Agentic QA – generate browser tests
+
+on:
+  issues:
+    types: [labeled]
+  workflow_dispatch:
+    inputs:
+      spec_path:
+        description: "Spec file or Spec Kit folder"
+        required: false
+        default: specs/001-conduit/spec.md
+
+jobs:
+  generate:
+    if: github.event_name == 'workflow_dispatch' || github.event.label.name == 'ready-for-tests'
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+    uses: yorkzhangyong-bot/agentic-qa-platform/.github/workflows/generate-tests.yml@main
+    with:
+      framework: playwright
+      engine: opencode
+      opencode_model: deepseek/deepseek-flash
+      test_dir: tests/e2e
+      # The app needs Node 22.12 or newer; the platform's default is 20.
+      node_version: "24"
+      app_url: ${{ vars.APP_URL }}
+      # Manual runs default to the Conduit spec. Issue runs leave it empty, so the labelled issue is the spec.
+      spec_path: ${{ inputs.spec_path }}
+      issue_number: ${{ github.event.issue.number }}
+    secrets:
+      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}

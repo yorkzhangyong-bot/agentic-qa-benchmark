@@ -17,6 +17,7 @@
     "db:reset": "node scripts/remove-db.mjs && npm run db:push -w api && npm run db:seed -w api"
   },
   "devDependencies": {
+    "@playwright/test": "1.65.0",
     "concurrently": "^10.0.7",
     "serve": "^14.2.7"
   }
