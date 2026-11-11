@@ -1,0 +1,29 @@
+name: Agentic QA – test and heal
+
+on:
+  push:
+    branches: [main]
+    # Test code (not tests/e2e/.gitkeep, so an empty test folder doesn't start a run) and the app.
+    paths:
+      - "tests/e2e/**/*.ts"
+      - "api/**"
+      - "web/**"
+  workflow_dispatch:
+
+jobs:
+  qa:
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+    uses: yorkzhangyong-bot/agentic-qa-platform/.github/workflows/test-and-heal.yml@main
+    with:
+      framework: playwright
+      engine: opencode
+      opencode_model: deepseek/deepseek-flash
+      test_dir: tests/e2e
+      # The app needs Node 22.12 or newer; the platform's default is 20.
+      node_version: "24"
+      app_url: ${{ vars.APP_URL }}
+    secrets:
+      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
