@@ -101,6 +101,7 @@
                     rows="3"
                     [formControl]="commentControl"
                   ></textarea>
+                  <small class="comment-counter">{{ commentLength() }}/500</small>
                 </div>
                 <div class="card-footer">
                   <img [src]="currentUser()?.image | defaultImage" class="comment-author-img" />
