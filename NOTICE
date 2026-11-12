@@ -66,5 +66,6 @@ web/
   (Vitest, jsdom, test setup), the end-to-end test configuration and scripts, Playwright,
   git-hook tooling (husky, lint-staged), Angular CLI analytics, the Bun lockfile, CLAUDE.md,
   CI workflows and the git submodule.
+- Added a character counter and a 500-character limit to the comment box on the article page.
 
 Both READMEs were rewritten for this repository.
