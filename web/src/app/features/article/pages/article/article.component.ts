@@ -23,7 +23,7 @@ import { FollowButtonComponent } from '../../../profile/components/follow-button
 import { DefaultImagePipe } from '../../../../shared/pipes/default-image.pipe';
 
 @Component({
-  selector: 'app-article-page',
+  selector: 'app-article-view',
   templateUrl: './article.component.html',
   imports: [
     ArticleMetaComponent,
