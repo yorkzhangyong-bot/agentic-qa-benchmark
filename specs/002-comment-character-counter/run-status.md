@@ -40,3 +40,4 @@
 - 2026-11-12 20:18: The duplicate follow-up task task_6385b42112dc (my resume message to T001) reported done on its own with the same evidence; T001 terminal released.
 - 2026-11-12 20:22: T004 done: commit 7501de6 on yorkzhangyong-bot/ccc-t004 (styles.css rule + header comment; web build and prettier pass), merged into feature/comment-character-counter; T004 ticked. T002 still running.
 - 2026-11-12 20:23: T002 done: commit cbc2d2e on yorkzhangyong-bot/ccc-t002 (commentLength signal; web build and prettier pass), merged into feature/comment-character-counter; T002 ticked. Starting T003 (ccc-t003) and T008 (ccc-t008).
+- 2026-11-12 20:27: T003 done: commit 1035c42 on yorkzhangyong-bot/ccc-t003 (counter element in the template; web build and prettier pass), merged into feature/comment-character-counter; T003 ticked. Starting T005 (ccc-t005, browser check US1) and T006 (ccc-t006, maxlength). T008 still running.
