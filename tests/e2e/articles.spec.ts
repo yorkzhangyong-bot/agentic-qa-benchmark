@@ -242,6 +242,8 @@ test.describe('Article authoring', () => {
         body: 'Delete me.',
       });
     });
+    // If the test fails before the article is deleted, afterEach removes it, so later tests see the seed data.
+    createdTitle = title;
 
     await signIn(page);
     await article.goto(created.slug);
