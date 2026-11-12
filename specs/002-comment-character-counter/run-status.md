@@ -39,3 +39,4 @@
 - 2026-11-12 20:18: T001 done (no commit: environment verified in ccc-t001, Node 24.15.0, seed correct, 3 API checks 200). Gotchas: the setup hook dirties package-lock.json (restore, never add); stop background servers via taskkill on the npm PID tree; probe ports with curl. T001 ticked. Starting T002 (ccc-t002) and T004 (ccc-t004).
 - 2026-11-12 20:18: The duplicate follow-up task task_6385b42112dc (my resume message to T001) reported done on its own with the same evidence; T001 terminal released.
 - 2026-11-12 20:22: T004 done: commit 7501de6 on yorkzhangyong-bot/ccc-t004 (styles.css rule + header comment; web build and prettier pass), merged into feature/comment-character-counter; T004 ticked. T002 still running.
+- 2026-11-12 20:23: T002 done: commit cbc2d2e on yorkzhangyong-bot/ccc-t002 (commentLength signal; web build and prettier pass), merged into feature/comment-character-counter; T002 ticked. Starting T003 (ccc-t003) and T008 (ccc-t008).
