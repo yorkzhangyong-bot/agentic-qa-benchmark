@@ -23,16 +23,16 @@ This feature exposes no new API. The only interface that changes is the comment 
 
 | Item | Contract |
 |---|---|
-| Counter element | One element with the class `comment-counter`, inside `.comment-form .card-block`, immediately after the textarea; plain text, not a link, field or button |
+| Counter element | One element with the class `comment-counter`, inside `.comment-form .card-block`, immediately after the textarea; plain text, not a link, field or button, in a smaller font than the textarea text (FR-013) |
 | Counter text | Exactly `<N>/500`, where N is the textarea value's length in UTF-16 code units, written without leading zeros; no other text in the element |
 | Initial text | `0/500` when the page opens and after a reload |
 | Update timing | Changes on every `input` event of the textarea and whenever the app sets or resets the control; no blur or extra key needed |
 | Textarea | Gains `maxlength="500"`; its class, placeholder and `rows` are unchanged |
-| Upper bound | The textarea value never exceeds 500 code units through user editing; the counter never shows a number above 500 |
-| After a successful post | Textarea value `''`, counter `0/500` (the existing `reset('')`) |
+| Upper bound | The textarea value never exceeds 500 code units through user editing: typing at 500 adds nothing, a paste is cut to the characters that fit, taken from its start, and a character that only partly fits (😀 with one code unit left) is not added; the counter never shows a number above 500 |
+| After a successful post | Textarea value `''`, counter `0/500` (the existing `reset('')`); the new comment is listed with the body the API stored, which is the posted text with leading and trailing whitespace trimmed, as today (spec FR-008) |
 | After a failed post | Textarea value and counter unchanged; the error list above the form shows the API message, as today |
 | Signed out | Neither the form nor the counter is rendered; "Sign in or sign up to add comments on this article." is unchanged |
 
 ## API (unchanged)
 
-`POST /api/articles/{slug}/comments` with `{ "comment": { "body": "<text>" } }` keeps its current behaviour: `body` is trimmed and must not be empty (error `body can't be blank`); there is no maximum length (spec Assumptions, decision 5). `GET /api/articles/{slug}/comments` and `DELETE /api/articles/{slug}/comments/{id}` are untouched.
+`POST /api/articles/{slug}/comments` with `{ "comment": { "body": "<text>" } }` keeps its current behaviour: `body` is trimmed and must not be empty (error `body can't be blank`); there is no maximum length: the server does not enforce the 500-character limit, no API change (spec Assumptions, decision 5). `GET /api/articles/{slug}/comments` and `DELETE /api/articles/{slug}/comments/{id}` are untouched.

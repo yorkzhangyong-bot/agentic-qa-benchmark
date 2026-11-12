@@ -6,7 +6,7 @@
 
 No change. The feature adds no entity, field, migration or API change.
 
-- **Comment** (unchanged; Prisma model in `api/prisma/schema.prisma`, API shape in `api/server/models/comment.model.ts`): `id`, `body`, `createdAt`, `updatedAt`, author, article. The API keeps validating `body` with `z.string().trim().min(1, "can't be blank")` in `api/server/schemas/comment.schema.ts`: no maximum length. The 500-character limit exists only in the comment box, as recorded in the spec's Assumptions (decision 5).
+- **Comment** (unchanged; Prisma model in `api/prisma/schema.prisma`, API shape in `api/server/models/comment.model.ts`): `id`, `body`, `createdAt`, `updatedAt`, author, article. The API keeps validating `body` with `z.string().trim().min(1, "can't be blank")` in `api/server/schemas/comment.schema.ts`: no maximum length. The server does not enforce the 500-character limit (no API change): the limit exists only in the comment box, as recorded in the spec's Assumptions (decision 5). The API trims leading and trailing whitespace from `body` before saving it, as today, so a posted comment is listed with the stored, trimmed text (spec FR-008).
 
 ## Component state (web)
 
@@ -21,6 +21,7 @@ No change. The feature adds no entity, field, migration or API change.
 
 - `commentLength()` is the number of UTF-16 code units in the box (FR-004): spaces, punctuation and line breaks count 1 each; an emoji such as 😀 counts 2.
 - `0 <= commentLength() <= 500` for every value produced by user editing (FR-006, FR-007).
+- A paste never adds a character that only partly fits: with 499 code units in the box, pasting 😀 (2 code units) adds nothing and the value stays at 499 (FR-006).
 - The rendered counter text is `${commentLength()}/500` (FR-003), with no other text.
 
 ### State transitions
@@ -30,6 +31,7 @@ No change. The feature adds no entity, field, migration or API change.
 | Page opens, signed in | `''` | 0 | `0/500` |
 | User types, deletes, cuts, pastes, undoes, replaces a selection | new value, at most 500 code units | length of the value | `<N>/500` |
 | User types with 500 in the box, or pastes more than fits | unchanged, or grows only up to 500 | unchanged, or 500 | `500/500` |
+| User pastes a character that only partly fits (😀 with one code unit left) | unchanged | unchanged | unchanged, for example `499/500` |
 | "Post Comment" succeeds | `''` (existing `reset('')`) | 0 | `0/500` |
 | "Post Comment" fails (for example "body can't be blank") | unchanged | unchanged | unchanged |
 | Page reloads | `''` | 0 | `0/500` |

@@ -34,7 +34,7 @@ Signed-in users get a live "N/500" character counter directly under the comment 
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-`.specify/memory/constitution.md` is the unfilled Spec Kit template: every principle, section and governance rule is still a placeholder, so it defines no gates and there is nothing to evaluate. In its place this plan keeps to the repository's own rules from `README.md` and the task brief: no API changes, no new libraries or configuration, no test hooks in the app, and the smallest change that meets the spec.
+`.specify/memory/constitution.md` is the unfilled Spec Kit template: every principle, section and governance rule is still a placeholder, so it defines no gates and there is nothing to evaluate. In its place this plan sets its own constraints: no API changes, no new libraries or configuration, no test hooks in the app, and the smallest change that meets the spec. `README.md` states none of these as rules; it only keeps the vendored apps as they are and asks that every change to them is listed in `NOTICE`, which the constraints respect.
 
 - Before Phase 0: PASS (no gates defined; the repository rules above are met by design).
 - After Phase 1 design: PASS. The design adds no project, service, abstraction or dependency.
@@ -83,7 +83,7 @@ Decisions and rejected alternatives are in [research.md](research.md), the compo
 2. `web/src/app/features/article/pages/article/article.component.html`: add `maxlength="500"` to the comment textarea (FR-006 to FR-008) and, directly after it inside `.card-block`, `<small class="comment-counter">{{ commentLength() }}/500</small>` (FR-001, FR-003). The form is already inside `*ifAuthenticated="true"`, so signed-out visitors never see the counter (FR-002).
 3. `web/src/theme/conduit/styles.css`: next to the other `.article-page .comment-form` rules, add `.article-page .comment-form .comment-counter { display: block; padding: 0 1.25rem 0.5rem; font-size: 0.8rem; text-align: right; color: var(--text-muted); }` (FR-013), and add `comment-counter` to the "Comments:" line of the header comment that lists the classes in use.
 4. `NOTICE`: one line under `web/` in "Changes made in this repository", for example "Added a character counter and a 500-character limit to the comment box on the article page."
-5. Verify with [quickstart.md](quickstart.md), including `npm run build` and the formatting check of the two component files.
+5. Verify with [quickstart.md](quickstart.md), including `npm run build` and the formatting check of the three changed files under `web/` (prettier with `--end-of-line auto`, because the checkout has CRLF line endings under `core.autocrlf=true`).
 
 ## Complexity Tracking
 
