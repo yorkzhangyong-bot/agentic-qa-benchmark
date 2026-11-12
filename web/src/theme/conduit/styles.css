@@ -15,7 +15,7 @@
  * Pages: home-page, auth-page, settings-page, editor-page, profile-page, article-page
  * Article: article-preview, article-meta, article-content, article-actions, articles-toggle
  * Comments: comment-author, comment-author-img, mod-options, date-posted
- * User: user-info, user-img, user-pic
+ * User: profile-info, user-img, user-pic
  * Misc: banner, logo-font, sidebar, feed-toggle, error-messages, counter,
  *       preview-link, author, date, info, attribution, active, disabled,
  *       pull-xs-right, text-xs-center, empty-feed-message
@@ -1479,7 +1479,7 @@ footer > .container {
  * PROFILE PAGE
  * ============================================================================ */
 
-.profile-page .user-info {
+.profile-page .profile-info {
   text-align: center;
   background: #fff;
   border-top: 1px solid #eee;
@@ -1487,25 +1487,25 @@ footer > .container {
   padding: 2rem 0 1rem 0;
 }
 
-.profile-page .user-info .user-img {
+.profile-page .profile-info .user-img {
   width: 100px;
   height: 100px;
   border-radius: 100px;
   margin-bottom: 1rem;
 }
 
-.profile-page .user-info h4 {
+.profile-page .profile-info h4 {
   font-weight: 700;
 }
 
-.profile-page .user-info p {
+.profile-page .profile-info p {
   margin: 0 auto 0.5rem auto;
   color: var(--text-lighter);
   max-width: 450px;
   font-weight: 300;
 }
 
-.profile-page .user-info .action-btn {
+.profile-page .profile-info .action-btn {
   float: right;
   color: var(--text-muted);
   border: 1px solid var(--text-muted);
