@@ -14,7 +14,7 @@
  * Tags: tag-list, tag-default, tag-pill, tag-outline
  * Pages: home-page, auth-page, settings-page, editor-page, profile-page, article-page
  * Article: article-preview, article-meta, article-content, article-actions, articles-toggle
- * Comments: comment-author, comment-author-img, mod-options, date-posted
+ * Comments: comment-author, comment-author-img, comment-counter, mod-options, date-posted
  * User: user-info, user-img, user-pic
  * Misc: banner, logo-font, sidebar, feed-toggle, error-messages, counter,
  *       preview-link, author, date, info, attribution, active, disabled,
@@ -1416,6 +1416,14 @@ footer > .container {
 .article-page .comment-form .card-block textarea {
   border: 0;
   padding: 1.25rem;
+}
+
+.article-page .comment-form .comment-counter {
+  display: block;
+  padding: 0 1.25rem 0.5rem;
+  font-size: 0.8rem;
+  text-align: right;
+  color: var(--text-muted);
 }
 
 .article-page .comment-form .card-footer .btn {
