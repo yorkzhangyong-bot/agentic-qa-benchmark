@@ -25,7 +25,7 @@
 
 **Purpose**: A working checkout with the seed data the checks rely on. No new dependencies or configuration.
 
-- [ ] T001 Verify the environment from the repository root: `node --version` is 22.12 or newer; run `npm run setup` if `node_modules/` or `api/dev.db` is missing; with the API stopped, run `npm run db:reset` if the seed data was changed earlier, so that `alice@example.com` (password `Password123!`) exists and "Markdown cheat sheet for Conduit authors" (`/article/Markdown-cheat-sheet-for-Conduit-authors-dfc9b07f`) has no comments
+- [x] T001 Verify the environment from the repository root: `node --version` is 22.12 or newer; run `npm run setup` if `node_modules/` or `api/dev.db` is missing; with the API stopped, run `npm run db:reset` if the seed data was changed earlier, so that `alice@example.com` (password `Password123!`) exists and "Markdown cheat sheet for Conduit authors" (`/article/Markdown-cheat-sheet-for-Conduit-authors-dfc9b07f`) has no comments
 
 ---
 
