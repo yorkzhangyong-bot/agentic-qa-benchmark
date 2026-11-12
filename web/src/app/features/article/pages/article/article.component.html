@@ -99,6 +99,7 @@
                     class="form-control"
                     placeholder="Write a comment..."
                     rows="3"
+                    maxlength="500"
                     [formControl]="commentControl"
                   ></textarea>
                   <small class="comment-counter">{{ commentLength() }}/500</small>
