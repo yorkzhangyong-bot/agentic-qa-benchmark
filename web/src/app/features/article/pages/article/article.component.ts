@@ -11,13 +11,13 @@ import { AsyncPipe, NgClass } from '@angular/common';
 import { MarkdownPipe } from '../../../../shared/pipes/markdown.pipe';
 import { ListErrorsComponent } from '../../../../shared/components/list-errors.component';
 import { ArticleCommentComponent } from '../../components/article-comment.component';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { combineLatest, EMPTY } from 'rxjs';
 import { Comment } from '../../models/comment.model';
 import { IfAuthenticatedDirective } from '../../../../core/auth/if-authenticated.directive';
 import { Errors } from '../../../../core/models/errors.model';
 import { Profile } from '../../../profile/models/profile.model';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { FavoriteButtonComponent } from '../../components/favorite-button.component';
 import { FollowButtonComponent } from '../../../profile/components/follow-button.component';
 import { DefaultImagePipe } from '../../../../shared/pipes/default-image.pipe';
@@ -50,6 +50,7 @@ export default class ArticleComponent implements OnInit {
   errors = signal<Errors | null>(null);
 
   commentControl = new FormControl<string>('', { nonNullable: true });
+  commentLength = toSignal(this.commentControl.valueChanges.pipe(map(value => value.length)), { initialValue: 0 });
   commentFormErrors = signal<Errors | null>(null);
   deleteCommentErrors = signal<Errors | null>(null);
 
