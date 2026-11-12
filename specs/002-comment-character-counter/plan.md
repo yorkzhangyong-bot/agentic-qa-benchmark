@@ -36,7 +36,7 @@ Signed-in users get a live "N/500" character counter directly under the comment 
 
 `.specify/memory/constitution.md` is the unfilled Spec Kit template: every principle, section and governance rule is still a placeholder, so it defines no gates and there is nothing to evaluate. In its place this plan sets its own constraints: no API changes, no new libraries or configuration, no test hooks in the app, and the smallest change that meets the spec. `README.md` states none of these as rules; it only keeps the vendored apps as they are and asks that every change to them is listed in `NOTICE`, which the constraints respect.
 
-- Before Phase 0: PASS (no gates defined; the repository rules above are met by design).
+- Before Phase 0: PASS (no gates defined; the constraints above are met by design).
 - After Phase 1 design: PASS. The design adds no project, service, abstraction or dependency.
 
 ## Project Structure

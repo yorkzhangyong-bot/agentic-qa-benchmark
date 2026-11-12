@@ -81,7 +81,7 @@ Whatever empties or changes the box, the counter matches the box: after a commen
 - Replacing a selection works like deleting and typing: with "a" x500 in the box, selecting the last 10 a and typing "b" gives "491/500".
 - Undo follows the box: paste "Hello world!" into the empty box ("12/500"), then press Ctrl+Z: the box is empty and the counter reads "0/500".
 - While a comment is being posted, the form is disabled and the counter keeps its number: while "Nice summary." is being posted the counter reads "13/500"; once the comment is posted, it reads "0/500".
-- The limit applies to the comment box only (see Assumptions, decision 5). A longer comment that another client posts straight to the API, for example "a" x600 sent by a signed-in user to `POST http://localhost:3000/api/articles/<slug>/comments`, is listed with the same text, as today; as today, leading and trailing spaces and line breaks are not kept.
+- The limit applies to the comment box only (see Assumptions, decision 5). A longer comment that another client posts straight to the API, for example "a" x600 sent by a signed-in user to `POST http://localhost:3000/api/articles/<slug>/comments` with the header `Authorization: Token <the user's token>` and the body `{"comment":{"body":"<text>"}}`, is listed with the same text, as today; as today, leading and trailing spaces and line breaks are not kept.
 - The counter is never shown to signed-out visitors, on any article page.
 
 ## Requirements *(mandatory)*

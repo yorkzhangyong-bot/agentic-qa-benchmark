@@ -43,14 +43,14 @@ No foundational tasks: the article page component, its reactive `commentControl`
 
 **Goal**: Signed-in users see "N/500" directly under the comment box, following every change to the box; signed-out visitors see no counter (spec FR-001 to FR-005, FR-013).
 
-**Independent Test**: Sign in as alice, open "Markdown cheat sheet for Conduit authors", see "0/500" under the empty comment box, type "Hello world!" and see "12/500", delete the text and see "0/500" again; signed out, the article shows "Sign in or sign up to add comments on this article." and no counter (quickstart.md checks 1 to 5, 13, 15 and 20).
+**Independent Test**: Sign in as alice, open "Markdown cheat sheet for Conduit authors", see "0/500" under the empty comment box, type "Hello world!" and see "12/500", delete the text and see "0/500" again; signed out, the article shows "Sign in or sign up to add comments on this article." and no counter (quickstart.md checks 1 to 5, 14, 16 and 21).
 
 ### Implementation for User Story 1
 
 - [ ] T002 [US1] Add the derived count to `web/src/app/features/article/pages/article/article.component.ts`: import `toSignal` from `@angular/core/rxjs-interop` and `map` from `rxjs/operators`, and add `commentLength = toSignal(this.commentControl.valueChanges.pipe(map(value => value.length)), { initialValue: 0 });` directly after `commentControl`. Per data-model.md it "equals `commentControl.value.length` at all times, starting at 0" and counts UTF-16 code units ("spaces, punctuation and line breaks count 1 each; an emoji such as 😀 counts 2"). Change nothing else in the class.
 - [ ] T003 [US1] Render the counter in `web/src/app/features/article/pages/article/article.component.html`: directly after the comment textarea, still inside `<div class="card-block">`, add `<small class="comment-counter">{{ commentLength() }}/500</small>`. Per contracts/comment-form.md the text is "Exactly `<N>/500` ... no other text in the element", and the element sits "inside `.comment-form .card-block`, immediately after the textarea". The form is already wrapped in `*ifAuthenticated="true"`, so signed-out visitors never see it. Depends on T002.
 - [ ] T004 [P] [US1] Style the counter in `web/src/theme/conduit/styles.css`: next to the existing `.article-page .comment-form .card-block textarea` rule, add `.article-page .comment-form .comment-counter { display: block; padding: 0 1.25rem 0.5rem; font-size: 0.8rem; text-align: right; color: var(--text-muted); }`, and add `comment-counter` to the "Comments:" line of the header comment at the top of the file (the list of classes in use). No other colour, font or layout changes.
-- [ ] T005 [US1] Manual check of User Story 1 with `npm run dev` per `specs/002-comment-character-counter/quickstart.md`: checks 1 to 5 (`0/500`, `12/500`, `6/500`, line break counts one, emoji counts two), check 13 (signed out: sign-in prompt, no counter), check 15 (`1/500` after typing `a`, `120/500` after pasting "a" x120) and check 20 (undo: paste `Hello world!`, Ctrl+Z, empty box and `0/500`). Fix and re-check until all pass.
+- [ ] T005 [US1] Manual check of User Story 1 with `npm run dev` per `specs/002-comment-character-counter/quickstart.md`: checks 1 to 5 (`0/500`, `12/500`, `6/500`, line break counts one, emoji counts two), check 14 (signed out: sign-in prompt, no counter), check 16 (`1/500` after typing `a`, `120/500` after pasting "a" x120) and check 21 (undo: paste `Hello world!`, Ctrl+Z, empty box and `0/500`). Fix and re-check until all pass.
 
 **Checkpoint**: The counter is visible, correct and live for signed-in users, absent for visitors. The box still accepts more than 500 characters until User Story 2 is done.
 
@@ -60,12 +60,12 @@ No foundational tasks: the article page component, its reactive `commentControl`
 
 **Goal**: The comment box accepts at most 500 characters; typing or pasting past 500 is cut off, a character that only partly fits is not added, the counter never shows more than "500/500", and a comment of exactly 500 characters posts normally and is listed with the same text (spec FR-006 to FR-008).
 
-**Independent Test**: Signed in as alice on her article, paste "a" x500 followed by "b" x100 (600 characters) into the empty box: the box keeps exactly the 500 a and no b, the counter reads "500/500", typing "b" adds nothing, and "Post Comment" lists a comment whose text is exactly those 500 a, after which the box is empty and the counter reads "0/500" (quickstart.md checks 6 to 9, 12 and 16 to 18).
+**Independent Test**: Signed in as alice on her article, paste "a" x500 followed by "b" x100 (600 characters) into the empty box: the box keeps exactly the 500 a and no b, the counter reads "500/500", typing "b" adds nothing, and "Post Comment" lists a comment whose text is exactly those 500 a, after which the box is empty and the counter reads "0/500" (quickstart.md checks 6 to 9, 12, 13 and 17 to 19).
 
 ### Implementation for User Story 2
 
 - [ ] T006 [US2] Add `maxlength="500"` to the comment textarea in `web/src/app/features/article/pages/article/article.component.html`, keeping `class="form-control"`, `placeholder="Write a comment..."`, `rows="3"` and `[formControl]="commentControl"` as they are. The browser then cuts typing and pasting off at 500 and does not insert a character that only partly fits (research.md decision 2), and the attribute also activates Angular's `MaxLengthValidator` on `commentControl` as a safety net. Per data-model.md, `0 <= commentLength() <= 500` must hold "for every value produced by user editing". No change to `addComment()` or to the API. Same file as T003, so do it after T003.
-- [ ] T007 [US2] Manual check of User Story 2 with `npm run dev` per `specs/002-comment-character-counter/quickstart.md`: checks 6 to 9 (pasting "a" x500 followed by "b" x100 keeps exactly the 500 a and shows `500/500`; typing `b` into the full box adds nothing; selecting the last 10 characters and typing `b` gives `491/500`; "a" x500 posts, is listed with the same text, and the counter returns to `0/500`), check 12 (498 characters plus two line breaks, and 498 characters plus `😀`, both end at `500/500`: the box is full exactly when the counter reaches 500) and checks 16 to 18 ("a" x499 then `b` gives `500/500`; "a" x499 then pasting `😀` stays at `499/500` with the box unchanged; "a" x490 then pasting `abcdefghijklmnopqrst` adds only `abcdefghij`). Fix and re-check until all pass.
+- [ ] T007 [US2] Manual check of User Story 2 with `npm run dev` per `specs/002-comment-character-counter/quickstart.md`: checks 6 to 9 (pasting "a" x500 followed by "b" x100 keeps exactly the 500 a and shows `500/500`; typing `b` into the full box adds nothing; selecting the last 10 characters and typing `b` gives `491/500`; "a" x500 posts, is listed with the same text, and the counter returns to `0/500`), check 12 (498 characters plus two line breaks, and 498 characters plus `😀`, both end at `500/500`: the box is full exactly when the counter reaches 500), check 13 (pasting "😀" x250 into the empty box gives `500/500`: all 250 fit and nothing more can be typed) and checks 17 to 19 ("a" x499 then `b` gives `500/500`; "a" x499 then pasting `😀` stays at `499/500` with the box unchanged; "a" x490 then pasting `abcdefghijklmnopqrst` adds only `abcdefghij`). Fix and re-check until all pass.
 
 **Checkpoint**: User Stories 1 and 2 together deliver the requested feature: a live counter with a hard maximum of 500.
 
@@ -75,12 +75,12 @@ No foundational tasks: the article page component, its reactive `commentControl`
 
 **Goal**: Whatever empties or changes the box, the counter matches it: "0/500" after a successful post and after a reload, unchanged after a failed post, correct after cutting text, and everything else about comments unchanged (spec FR-009 to FR-012).
 
-**Independent Test**: Signed in as alice on her article, type "Nice summary." ("13/500") and post it: the comment "Nice summary." is listed and the counter reads "0/500"; type three spaces ("3/500") and click "Post Comment": "body can't be blank" and still "3/500"; reload: empty box and "0/500" (quickstart.md checks 10, 11, 14, 19, 21 and 22).
+**Independent Test**: Signed in as alice on her article, type "Nice summary." ("13/500") and post it: the comment "Nice summary." is listed and the counter reads "0/500"; type three spaces ("3/500") and click "Post Comment": "body can't be blank" and still "3/500"; reload: empty box and "0/500" (quickstart.md checks 10, 11, 15, 20, 22 and 23).
 
 ### Implementation for User Story 3
 
 - [ ] T008 [US3] Confirm in `web/src/app/features/article/pages/article/article.component.ts` that `addComment()` still calls `this.commentControl.reset('')` only in the success branch and leaves the control untouched in the error branch, so the `valueChanges`-driven `commentLength` returns to 0 after a post (FR-009) and keeps its value after a failed post (FR-010). No code change is expected from T002; if the reset were missing or moved, restore it. Depends on T002.
-- [ ] T009 [US3] Manual check of User Story 3 with `npm run dev` per `specs/002-comment-character-counter/quickstart.md`: check 10 (three spaces, "Post Comment": `body can't be blank`, no comment added, spaces still in the box, `3/500`), check 11 (type `Hello world!`, reload: empty box, `0/500`), check 14 (delete the test comment with its trash icon: gone at once, still gone after a reload), check 19 (type `Hello world!`, select all and cut with Ctrl+X: empty box, `0/500`), check 21 (while `Nice summary.` is being posted the form is disabled and the counter keeps `13/500`; afterwards the comment is listed under alice, the box is empty and the counter reads `0/500`; the comment survives a reload and its trash icon deletes it) and check 22 (the seeded article with 5 comments still lists all 5, none with a trash icon). Fix and re-check until all pass.
+- [ ] T009 [US3] Manual check of User Story 3 with `npm run dev` per `specs/002-comment-character-counter/quickstart.md`: check 10 (three spaces, "Post Comment": `body can't be blank`, no comment added, spaces still in the box, `3/500`), check 11 (type `Hello world!`, reload: empty box, `0/500`), check 15 (delete the test comment with its trash icon: gone at once, still gone after a reload), check 20 (type `Hello world!`, select all and cut with Ctrl+X: empty box, `0/500`), check 22 (while `Nice summary.` is being posted the form is disabled and the counter keeps `13/500`; afterwards the comment is listed under alice, the box is empty and the counter reads `0/500`; the comment survives a reload and its trash icon deletes it) and check 23 (the seeded article with 5 comments still lists all 5, none with a trash icon). Fix and re-check until all pass.
 
 **Checkpoint**: All three user stories pass their quickstart checks.
 
@@ -93,7 +93,7 @@ No foundational tasks: the article page component, its reactive `commentControl`
 - [ ] T010 [P] Add one line to the `web/` list under "Changes made in this repository" in `NOTICE`: "Added a character counter and a 500-character limit to the comment box on the article page." Keep the rest of the file unchanged.
 - [ ] T011 Formatting check from `web/`: `npx prettier --check --end-of-line auto src/app/features/article/pages/article/article.component.ts src/app/features/article/pages/article/article.component.html src/theme/conduit/styles.css`. The `--end-of-line auto` flag is needed because the checkout has CRLF line endings under `core.autocrlf=true`; without it the check fails on line endings alone, before any change. If the check fails, run the same command with `--write` instead of `--check` and review the diff. Depends on T002, T003, T004 and T006.
 - [ ] T012 Build check from the repository root: `npm run build` (Prisma client generation, `api/` and `web/` production builds, as CI runs them) must finish without errors or new warnings. Depends on all code tasks (T002, T003, T004, T006).
-- [ ] T013 Final pass: with all changes in place, run `specs/002-comment-character-counter/quickstart.md` checks 1 to 22 in one session, and confirm with `git status` that, outside `specs/002-comment-character-counter/`, only the four intended files changed: `web/src/app/features/article/pages/article/article.component.ts`, `web/src/app/features/article/pages/article/article.component.html`, `web/src/theme/conduit/styles.css` and `NOTICE`. Depends on T010 to T012.
+- [ ] T013 Final pass: with all changes in place, run `specs/002-comment-character-counter/quickstart.md` checks 1 to 23 in one session, and confirm with `git status` that, outside `specs/002-comment-character-counter/`, only the four intended files changed: `web/src/app/features/article/pages/article/article.component.ts`, `web/src/app/features/article/pages/article/article.component.html`, `web/src/theme/conduit/styles.css` and `NOTICE`. Depends on T010 to T012.
 
 ---
 
@@ -109,8 +109,8 @@ No foundational tasks: the article page component, its reactive `commentControl`
 ### User Story Dependencies
 
 - **User Story 1 (P1)**: Starts after Phase 1. No dependency on other stories. Delivers the MVP.
-- **User Story 2 (P1)**: T006 edits the same template as T003, so it follows US1. Independently checkable once done (quickstart checks 6 to 9, 12 and 16 to 18).
-- **User Story 3 (P2)**: T008 reads the class changed in T002; no code change expected. Independently checkable (quickstart checks 10, 11, 14, 19, 21 and 22).
+- **User Story 2 (P1)**: T006 edits the same template as T003, so it follows US1. Independently checkable once done (quickstart checks 6 to 9, 12, 13 and 17 to 19).
+- **User Story 3 (P2)**: T008 reads the class changed in T002; no code change expected. Independently checkable (quickstart checks 10, 11, 15, 20, 22 and 23).
 
 ### Within Each User Story
 
@@ -147,7 +147,7 @@ Task: "T004 Style the counter in web/src/theme/conduit/styles.css"
 1. Complete Phase 1: Setup.
 2. Phase 2 has nothing to do.
 3. Complete Phase 3: User Story 1 (T002 to T005).
-4. **STOP and VALIDATE**: quickstart checks 1 to 5, 13, 15 and 20.
+4. **STOP and VALIDATE**: quickstart checks 1 to 5, 14, 16 and 21.
 5. The live counter is demonstrable; the limit is not yet enforced.
 
 ### Incremental Delivery
