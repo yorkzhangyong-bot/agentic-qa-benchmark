@@ -12,8 +12,8 @@
 | 1 Start | done | Run and branch created 2026-11-12 |
 | 2 Spec (Spec Kit) | done | commit 3166283: spec.md, plan.md, tasks.md (13 tasks, T004/T010/T011 parallel) |
 | 3 Spec review + approval gate | done | round 2 PASS; nits in 3bdd573; gate gate_e75c6401926f approved by the user 2026-11-12 16:03 |
-| 4 Implementation | in progress | 13 Orca tasks (T001 to T013), one child worktree each |
-| 5 Code review | pending | |
+| 4 Implementation | done | 13 of 13 tasks passed; code = 4 files (component ts/html, styles.css, NOTICE); all 23 quickstart checks green in T013 |
+| 5 Code review | in progress | round 1: opus reviewer dispatched |
 | 6 QA tests (agentic QA platform) | pending | |
 | 7 Final approval | pending | |
 
@@ -48,3 +48,7 @@
 - 2026-11-12 21:35: T009 passed: quickstart checks 10, 11, 15, 20, 22 and 23 all matched in headed Chrome 157 (failed post keeps 3/500; reload gives 0/500; cut gives 0/500; form disabled with 13/500 during a 3 s delayed POST; seeded article keeps its 5 comments). No code change, nothing to merge; T009 ticked. Starting T011 (ccc-t011, prettier check).
 - 2026-11-12 21:37: T011 passed: prettier --check --end-of-line auto clean first time on the three feature files (prettier 3.9.10); no commit. T011 ticked. Starting T012 (ccc-t012, npm run build).
 - 2026-11-12 21:44: T012 passed: npm run build exit 0 (only the pre-existing Nitro compatibilityDate warning from api/; ng build clean, initial bundle 386.67 kB); npm start served /api/tags and the app with <app-root>. No commit. T012 ticked. Starting T013 (ccc-t013, final pass).
+- 2026-11-13 07:34: T013 worker (dispatch ctx_842f6ae7a43b, worktree ccc-t013) stopped: Claude session limit reached again (resets 00:30 Europe/Berlin). Its chat keeps its history; resume by send once the limit has reset.
+- 2026-11-13 07:34: Limit reset confirmed (07:34 local); resume message sent to the T013 worker.
+- 2026-11-13 07:43: T013 passed: 23 of 23 quickstart checks in one Chromium session, diff-stat a2b2be5...HEAD excluding specs = NOTICE, article.component.html (+2), article.component.ts (+5/-2), styles.css (+10/-1). No code change. T013 ticked. Stage 4 done: all 13 tasks completed, every branch merged into feature/comment-character-counter.
+- 2026-11-13 07:43: Stage 5 round 1 started: read-only code reviewer (claude/opus, current worktree) reviewing the full diff against spec.md.
