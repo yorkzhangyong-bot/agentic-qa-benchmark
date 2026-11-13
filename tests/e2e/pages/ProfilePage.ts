@@ -18,15 +18,15 @@ export class ProfilePage {
 
   constructor(page: Page) {
     this.page = page;
-    this.avatar = page.locator('.user-info img');
-    this.username = page.locator('.user-info h4');
-    this.bio = page.locator('.user-info p');
+    this.avatar = page.locator('.profile-info img');
+    this.username = page.locator('.profile-info h4');
+    this.bio = page.locator('.profile-info p');
     this.myPostsTab = page.getByRole('link', { name: 'My Posts', exact: true });
     this.favoritesTab = page.getByRole('link', { name: 'Favorited Posts', exact: true });
     this.activeTab = page.locator('.articles-toggle a.nav-link.active');
     this.editProfileLink = page.getByRole('link', { name: 'Edit Profile Settings' });
     this.followButton = page
-      .locator('.user-info')
+      .locator('.profile-info')
       .getByRole('button', { name: /(Follow|Unfollow) / });
     this.previews = page.locator('app-article-preview');
     this.pageButtons = page.locator('.pagination .page-link');
