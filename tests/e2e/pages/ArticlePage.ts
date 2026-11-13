@@ -24,7 +24,7 @@ export class ArticlePage {
     this.date = page.locator('.banner .date');
     this.tagItems = page.locator('.article-content .tag-list li');
     this.content = page.locator('.article-content');
-    this.articleBody = page.locator('.article-content > div > div').first();
+    this.articleBody = page.locator('.article-content section').first();
     this.comments = page.locator('app-article-comment');
     this.commentBox = page.getByPlaceholder('Write a comment...');
     this.postCommentButton = page.getByRole('button', { name: 'Post Comment', exact: true });
