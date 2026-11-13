@@ -11,7 +11,9 @@ export class ArticlePage {
   readonly tagItems: Locator;
   readonly content: Locator;
   readonly comments: Locator;
+  readonly commentForm: Locator;
   readonly commentBox: Locator;
+  readonly commentCounter: Locator;
   readonly postCommentButton: Locator;
   readonly errors: Locator;
   readonly articleBody: Locator;
@@ -26,7 +28,11 @@ export class ArticlePage {
     this.content = page.locator('.article-content');
     this.articleBody = page.locator('.article-content > div > div').first();
     this.comments = page.locator('app-article-comment');
+    // The counter is a plain <small> with no role, label or test id; its exact text is the only
+    // accessible hook, anchored to the comment form so it cannot match anything else on the page.
+    this.commentForm = page.locator('form.comment-form');
     this.commentBox = page.getByPlaceholder('Write a comment...');
+    this.commentCounter = this.commentForm.getByText(/^\d+\/500$/);
     this.postCommentButton = page.getByRole('button', { name: 'Post Comment', exact: true });
     this.errors = page.locator('.error-messages');
   }
