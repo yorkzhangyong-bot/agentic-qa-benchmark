@@ -20,7 +20,7 @@ export class ArticlePage {
     this.page = page;
     this.title = page.getByRole('heading', { level: 1 });
     this.topActions = page.locator('.banner .article-meta');
-    this.bottomActions = page.locator('.article-actions');
+    this.bottomActions = page.locator('.article-footer .article-meta');
     this.date = page.locator('.banner .date');
     this.tagItems = page.locator('.article-content .tag-list li');
     this.content = page.locator('.article-content');
