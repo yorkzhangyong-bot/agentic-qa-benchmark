@@ -62,8 +62,6 @@ export default class EditorComponent implements OnInit {
     if (tag != null && tag.trim() !== '' && this.tagList().indexOf(tag) < 0) {
       this.tagList.update(tags => [...tags, tag]);
     }
-    // clear the input
-    this.tagField.reset('');
   }
 
   removeTag(tagName: string): void {
