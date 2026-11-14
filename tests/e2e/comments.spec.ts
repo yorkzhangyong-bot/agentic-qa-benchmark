@@ -81,7 +81,7 @@ test.describe('Comments', () => {
     const comment = article.comments.filter({ hasText: text });
     await expect(comment).toHaveCount(1);
 
-    await comment.locator('.mod-options i').click();
+    await comment.locator('.comment-actions i').click();
 
     await expect(article.comments.filter({ hasText: text })).toHaveCount(0);
 
@@ -116,9 +116,9 @@ test.describe('Comments', () => {
 
     const bobComments = article.commentsBy('bob');
     await expect(bobComments).toHaveCount(2);
-    await expect(bobComments.locator('.mod-options')).toHaveCount(2);
-    await expect(article.commentsBy('carol').locator('.mod-options')).toHaveCount(0);
-    await expect(article.commentsBy('dave').locator('.mod-options')).toHaveCount(0);
-    await expect(article.commentsBy('erin').locator('.mod-options')).toHaveCount(0);
+    await expect(bobComments.locator('.comment-actions')).toHaveCount(2);
+    await expect(article.commentsBy('carol').locator('.comment-actions')).toHaveCount(0);
+    await expect(article.commentsBy('dave').locator('.comment-actions')).toHaveCount(0);
+    await expect(article.commentsBy('erin').locator('.comment-actions')).toHaveCount(0);
   });
 });
