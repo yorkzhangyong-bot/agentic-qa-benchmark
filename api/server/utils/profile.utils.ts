@@ -1,7 +1,7 @@
 import { User } from '~/models/user.model';
 import { Profile } from '~/models/profile.model';
 
-const profileMapper = (user: any, id: number | undefined): Profile => ({
+const toProfile = (user: any, id: number | undefined): Profile => ({
   username: user.username,
   bio: user.bio,
   image: user.image,
@@ -10,4 +10,4 @@ const profileMapper = (user: any, id: number | undefined): Profile => ({
     : false,
 });
 
-export default profileMapper;
+export default toProfile;

@@ -1,5 +1,5 @@
 import HttpException from "~/models/http-exception.model";
-import profileMapper from "~/utils/profile.utils";
+import toProfile from "~/utils/profile.utils";
 import {Tag} from "~/models/tag.model";
 import {definePrivateEventHandler} from "~/auth-event-handler";
 
@@ -47,7 +47,7 @@ export default definePrivateEventHandler(async (event, {auth}) => {
 
     const result = {
         ...article,
-        author: profileMapper(article.author, auth.id),
+        author: toProfile(article.author, auth.id),
         tagList: article?.tagList.map((tag: Tag) => tag.name),
         favorited: article.favoritedBy.some((favorited: any) => favorited.id === auth.id),
         favoritesCount: _count?.favoritedBy,
