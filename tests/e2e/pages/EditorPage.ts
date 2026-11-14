@@ -21,7 +21,7 @@ export class EditorPage {
     this.tagInput = page.getByPlaceholder('Enter tags');
     this.publishButton = page.getByRole('button', { name: 'Publish Article', exact: true });
     this.tagChips = page.locator('.tag-list .tag-pill');
-    this.errors = page.locator('.error-messages');
+    this.errors = page.locator('.form-errors');
   }
 
   async goto(path = '/editor'): Promise<void> {
