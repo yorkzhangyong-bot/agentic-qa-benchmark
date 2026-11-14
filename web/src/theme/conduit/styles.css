@@ -16,8 +16,8 @@
  * Article: article-preview, article-meta, article-content, article-actions, articles-toggle
  * Comments: comment-author, comment-author-img, mod-options, date-posted
  * User: user-info, user-img, user-pic
- * Misc: banner, logo-font, sidebar, feed-toggle, error-messages, counter,
- *       preview-link, author, date, info, attribution, active, disabled,
+ * Misc: banner, logo-font, sidebar, feed-toggle, form-errors, counter,
+ *       article-link, author, date, info, attribution, active, disabled,
  *       pull-xs-right, text-xs-center, empty-feed-message
  *
  * NOTE: auth-page, settings-page, and empty-feed-message are semantic hooks
@@ -54,9 +54,7 @@
   --content-breakpoint: 1080px;
 }
 
-/* ============================================================================
- * CSS RESET & BASE
- * ============================================================================ */
+/* ---- CSS RESET & BASE ---- */
 
 *,
 *::before,
@@ -391,9 +389,7 @@ fieldset {
   }
 }
 
-/* ============================================================================
- * FORMS
- * ============================================================================ */
+/* ---- FORMS ---- */
 
 .form-control {
   display: block;
@@ -440,9 +436,7 @@ fieldset {
   margin-bottom: 1rem;
 }
 
-/* ============================================================================
- * BUTTONS
- * ============================================================================ */
+/* ---- BUTTONS ---- */
 
 .btn {
   display: inline-block;
@@ -729,9 +723,7 @@ fieldset[disabled] a.btn {
   border-radius: 0.375rem;
 }
 
-/* ============================================================================
- * NAVIGATION
- * ============================================================================ */
+/* ---- NAVIGATION ---- */
 
 .nav {
   padding-left: 0;
@@ -901,9 +893,7 @@ fieldset[disabled] a.btn {
   color: var(--brand);
 }
 
-/* ============================================================================
- * CARDS
- * ============================================================================ */
+/* ---- CARDS ---- */
 
 .card {
   position: relative;
@@ -948,9 +938,7 @@ fieldset[disabled] a.btn {
   border-radius: 0 0 0.75rem 0.75rem;
 }
 
-/* ============================================================================
- * PAGINATION
- * ============================================================================ */
+/* ---- PAGINATION ---- */
 
 .pagination {
   display: inline-block;
@@ -1016,9 +1004,7 @@ fieldset[disabled] a.btn {
   border-color: var(--border);
 }
 
-/* ============================================================================
- * TAGS
- * ============================================================================ */
+/* ---- TAGS ---- */
 
 .tag-pill {
   padding-right: 0.6em;
@@ -1065,9 +1051,7 @@ ul.tag-list li {
   display: inline-block;
 }
 
-/* ============================================================================
- * UTILITIES
- * ============================================================================ */
+/* ---- UTILITIES ---- */
 
 .pull-xs-right {
   float: right !important;
@@ -1077,9 +1061,7 @@ ul.tag-list li {
   text-align: center !important;
 }
 
-/* ============================================================================
- * FOOTER
- * ============================================================================ */
+/* ---- FOOTER ---- */
 
 footer {
   background: #fff;
@@ -1104,11 +1086,9 @@ footer .attribution {
   font-weight: 300;
 }
 
-/* ============================================================================
- * ERROR MESSAGES
- * ============================================================================ */
+/* ---- ERROR MESSAGES ---- */
 
-.error-messages {
+.form-errors {
   color: var(--danger);
   font-weight: bold;
   padding-left: 2.5rem;
@@ -1116,9 +1096,7 @@ footer .attribution {
   list-style: disc;
 }
 
-/* ============================================================================
- * BANNER
- * ============================================================================ */
+/* ---- BANNER ---- */
 
 .banner {
   color: var(--text);
@@ -1137,15 +1115,13 @@ footer .attribution {
   margin-top: 1.5rem;
 }
 
-/* ============================================================================
- * ARTICLE PREVIEW & META
- * ============================================================================ */
+/* ---- ARTICLE PREVIEW & META ---- */
 
-.preview-link {
+.article-link {
   color: inherit;
 }
 
-.preview-link:hover {
+.article-link:hover {
   text-decoration: inherit;
 }
 
@@ -1201,14 +1177,14 @@ footer .attribution {
   margin: 0 0 1rem 0;
 }
 
-.article-preview .preview-link h1 {
+.article-preview .article-link h1 {
   font-weight: 600;
   font-size: 1.5rem;
   line-height: 1.1;
   margin-bottom: 3px;
 }
 
-.article-preview .preview-link p {
+.article-preview .article-link p {
   font-weight: 300;
   font-size: 1rem;
   color: var(--text-muted);
@@ -1216,7 +1192,7 @@ footer .attribution {
   line-height: 1.3rem;
 }
 
-.article-preview .preview-link span {
+.article-preview .article-link span {
   max-width: 30%;
   font-size: 0.8rem;
   font-weight: 300;
@@ -1224,13 +1200,13 @@ footer .attribution {
   vertical-align: middle;
 }
 
-.article-preview .preview-link ul {
+.article-preview .article-link ul {
   float: right;
   max-width: 50%;
   vertical-align: top;
 }
 
-.article-preview .preview-link ul li {
+.article-preview .article-link ul li {
   font-weight: 300;
   font-size: 0.8rem;
   padding-top: 0;
@@ -1241,9 +1217,7 @@ footer .attribution {
   font-size: 0.8rem;
 }
 
-/* ============================================================================
- * HOME PAGE
- * ============================================================================ */
+/* ---- HOME PAGE ---- */
 
 .home-page .banner p {
   text-align: center;
@@ -1281,9 +1255,7 @@ footer .attribution {
   margin-bottom: 0.2rem;
 }
 
-/* ============================================================================
- * ARTICLE PAGE
- * ============================================================================ */
+/* ---- ARTICLE PAGE ---- */
 
 .article-page .banner {
   padding: 2rem 0;
@@ -1475,9 +1447,7 @@ footer > .container {
   opacity: 1;
 }
 
-/* ============================================================================
- * PROFILE PAGE
- * ============================================================================ */
+/* ---- PROFILE PAGE ---- */
 
 .profile-page .user-info {
   text-align: center;
@@ -1515,9 +1485,7 @@ footer > .container {
   margin: 1.5rem 0 -1px 0;
 }
 
-/* ============================================================================
- * EDITOR PAGE
- * ============================================================================ */
+/* ---- EDITOR PAGE ---- */
 
 .editor-page .tag-list i {
   font-size: 0.6rem;

@@ -1,5 +1,6 @@
 @if (errorList) {
-  <ul class="error-messages">
+  <!-- One item per message from the API -->
+  <ul class="form-errors">
     @for (error of errorList; track error) {
       <li>{{ error }}</li>
     }
