@@ -24,7 +24,7 @@ export class SettingsPage {
     this.passwordInput = page.getByPlaceholder('New Password');
     this.updateButton = page.getByRole('button', { name: 'Update Settings', exact: true });
     this.logoutButton = page.getByRole('button', { name: 'Or click here to logout.', exact: true });
-    this.errors = page.locator('.error-messages');
+    this.errors = page.locator('.form-errors');
   }
 
   async goto(): Promise<void> {
