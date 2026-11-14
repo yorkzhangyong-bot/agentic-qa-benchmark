@@ -18,11 +18,11 @@ import { DefaultImagePipe } from '../../../shared/pipes/default-image.pipe';
           </p>
         </div>
         <div class="card-footer">
-          <a class="comment-author" [routerLink]="['/profile', comment.author.username]">
+          <a class="comment-author-link" [routerLink]="['/profile', comment.author.username]">
             <img [src]="comment.author.image | defaultImage" class="comment-author-img" />
           </a>
           &nbsp;
-          <a class="comment-author" [routerLink]="['/profile', comment.author.username]">
+          <a class="comment-author-link" [routerLink]="['/profile', comment.author.username]">
             {{ comment.author.username }}
           </a>
           <span class="date-posted">

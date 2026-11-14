@@ -9,6 +9,7 @@
     </div>
   }
   @if (article(); as a) {
+    <!-- The banner: title, author and the article's controls -->
     <div class="banner">
       <div class="container">
         <h1>{{ a.title }}</h1>
@@ -22,15 +23,15 @@
 
               <button
                 class="btn btn-sm btn-outline-danger"
-                [ngClass]="{ disabled: isDeleting() }"
                 (click)="deleteArticle()"
+                [ngClass]="{ disabled: isDeleting() }"
               >
                 <i class="ion-trash-a"></i> Delete Article
               </button>
             </span>
           } @else {
             <span>
-              <app-follow-button [profile]="a.author" (toggle)="toggleFollowing($event)"> </app-follow-button>
+              <app-follow-button [profile]="a.author" (toggle)="toggleFollowing($event)" />
 
               <app-favorite-button [article]="a" (toggle)="onToggleFavorite($event)">
                 {{ a.favorited ? 'Unfavorite' : 'Favorite' }} Article
@@ -42,6 +43,7 @@
       </div>
     </div>
 
+    <!-- The body, rendered from Markdown, and the tags -->
     <div class="container page">
       <div class="row article-content">
         <div class="col-md-12">
@@ -59,7 +61,8 @@
 
       <hr />
 
-      <div class="article-actions">
+      <!-- The same controls again below the body -->
+      <div class="article-footer">
         <app-article-meta [article]="a">
           @if (canModify()) {
             <span>
@@ -69,8 +72,8 @@
 
               <button
                 class="btn btn-sm btn-outline-danger"
-                [ngClass]="{ disabled: isDeleting() }"
                 (click)="deleteArticle()"
+                [ngClass]="{ disabled: isDeleting() }"
               >
                 <i class="ion-trash-a"></i> Delete Article
               </button>
@@ -88,6 +91,7 @@
         </app-article-meta>
       </div>
 
+      <!-- Comments: the form for signed-in users, a sign-in prompt for the others, then the list -->
       <div class="row">
         <div class="col-xs-12 col-md-8 offset-md-2">
           <div *ifAuthenticated="true">
@@ -97,13 +101,13 @@
                 <div class="card-block">
                   <textarea
                     class="form-control"
-                    placeholder="Write a comment..."
                     rows="3"
+                    placeholder="Write a comment..."
                     [formControl]="commentControl"
                   ></textarea>
                 </div>
                 <div class="card-footer">
-                  <img [src]="currentUser()?.image | defaultImage" class="comment-author-img" />
+                  <img class="comment-author-img" [src]="currentUser()?.image | defaultImage" />
                   <button class="btn btn-sm btn-primary" type="submit">Post Comment</button>
                 </div>
               </fieldset>
@@ -111,8 +115,8 @@
           </div>
 
           <div *ifAuthenticated="false">
-            <a [routerLink]="['/login']">Sign in</a> or <a [routerLink]="['/register']">sign up</a> to add comments on
-            this article.
+            <a [routerLink]="['/login']">Sign in</a> or <a [routerLink]="['/register']">sign up</a>
+            to add comments on this article.
           </div>
 
           <app-list-errors [errors]="deleteCommentErrors()" />

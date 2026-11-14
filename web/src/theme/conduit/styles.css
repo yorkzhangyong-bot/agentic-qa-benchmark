@@ -13,8 +13,8 @@
  * Pagination: pagination, page-item, page-link
  * Tags: tag-list, tag-default, tag-pill, tag-outline
  * Pages: home-page, auth-page, settings-page, editor-page, profile-page, article-page
- * Article: article-preview, article-meta, article-content, article-actions, articles-toggle
- * Comments: comment-author, comment-author-img, mod-options, date-posted
+ * Article: article-preview, article-meta, article-content, article-footer, articles-toggle
+ * Comments: comment-author-link, comment-author-img, mod-options, date-posted
  * User: user-info, user-img, user-pic
  * Misc: banner, logo-font, sidebar, feed-toggle, error-messages, counter,
  *       preview-link, author, date, info, attribution, active, disabled,
@@ -1314,7 +1314,7 @@ footer .attribution {
 
 .article-page .banner > .container,
 .article-page .article-content,
-.article-page .article-actions,
+.article-page .article-footer,
 .article-page .container.page > .row {
   max-width: var(--content-width);
   margin-left: auto;
@@ -1399,13 +1399,13 @@ footer > .container {
   list-style: lower-roman;
 }
 
-.article-page .article-actions {
+.article-page .article-footer {
   text-align: center;
   margin-top: 1.5rem;
   margin-bottom: 3rem;
 }
 
-.article-page .article-actions .article-meta .info {
+.article-page .article-footer .article-meta .info {
   text-align: left;
 }
 
@@ -1447,7 +1447,7 @@ footer > .container {
   border-radius: 30px;
 }
 
-.article-page .card .comment-author {
+.article-page .card .comment-author-link {
   display: inline-block;
   vertical-align: middle;
 }
