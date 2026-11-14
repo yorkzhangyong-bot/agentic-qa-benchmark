@@ -79,7 +79,7 @@
             <span>
               <app-follow-button [profile]="a.author" (toggle)="toggleFollowing($event)" />
 
-              <app-favorite-button [article]="a" (toggle)="onToggleFavorite($event)">
+              <app-favorite-button [article]="a">
                 {{ a.favorited ? 'Unfavorite' : 'Favorite' }} Article
                 <span class="counter">({{ a.favoritesCount }})</span>
               </app-favorite-button>
