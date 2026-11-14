@@ -19,7 +19,7 @@ export class AuthPage {
     this.emailInput = page.getByPlaceholder('Email');
     this.passwordInput = page.getByPlaceholder('Password');
     this.submitButton = page.locator('form button[type="submit"]');
-    this.errors = page.locator('.error-messages');
+    this.errors = page.locator('.form-errors');
     this.haveAccountLink = page.getByRole('link', { name: 'Have an account?' });
     this.needAccountLink = page.getByRole('link', { name: 'Need an account?' });
   }
