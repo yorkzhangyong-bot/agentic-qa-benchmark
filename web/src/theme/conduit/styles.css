@@ -16,7 +16,7 @@
  * Article: article-preview, article-meta, article-content, article-actions, articles-toggle
  * Comments: comment-author, comment-author-img, mod-options, date-posted
  * User: user-info, user-img, user-pic
- * Misc: banner, logo-font, sidebar, feed-toggle, error-messages, counter,
+ * Misc: banner, logo-font, sidebar, feed-toggle, form-errors, counter,
  *       preview-link, author, date, info, attribution, active, disabled,
  *       pull-xs-right, text-xs-center, empty-feed-message
  *
@@ -1108,7 +1108,7 @@ footer .attribution {
  * ERROR MESSAGES
  * ============================================================================ */
 
-.error-messages {
+.form-errors {
   color: var(--danger);
   font-weight: bold;
   padding-left: 2.5rem;

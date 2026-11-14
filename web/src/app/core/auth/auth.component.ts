@@ -37,7 +37,6 @@ export default class AuthComponent implements OnInit {
         nonNullable: true,
       }),
       password: new FormControl('', {
-        validators: [Validators.required],
         nonNullable: true,
       }),
     });
