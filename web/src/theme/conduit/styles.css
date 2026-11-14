@@ -17,7 +17,7 @@
  * Comments: comment-author, comment-author-img, comment-actions, date-posted
  * User: user-info, user-img, user-pic
  * Misc: banner, logo-font, sidebar, feed-toggle, error-messages, counter,
- *       preview-link, author, date, info, attribution, active, disabled,
+ *       article-link, author, date, info, attribution, active, disabled,
  *       pull-xs-right, text-xs-center, empty-feed-message
  *
  * NOTE: auth-page, settings-page, and empty-feed-message are semantic hooks
@@ -1141,11 +1141,11 @@ footer .attribution {
  * ARTICLE PREVIEW & META
  * ============================================================================ */
 
-.preview-link {
+.article-link {
   color: inherit;
 }
 
-.preview-link:hover {
+.article-link:hover {
   text-decoration: inherit;
 }
 
@@ -1201,14 +1201,14 @@ footer .attribution {
   margin: 0 0 1rem 0;
 }
 
-.article-preview .preview-link h1 {
+.article-preview .article-link h1 {
   font-weight: 600;
   font-size: 1.5rem;
   line-height: 1.1;
   margin-bottom: 3px;
 }
 
-.article-preview .preview-link p {
+.article-preview .article-link p {
   font-weight: 300;
   font-size: 1rem;
   color: var(--text-muted);
@@ -1216,7 +1216,7 @@ footer .attribution {
   line-height: 1.3rem;
 }
 
-.article-preview .preview-link span {
+.article-preview .article-link span {
   max-width: 30%;
   font-size: 0.8rem;
   font-weight: 300;
@@ -1224,13 +1224,13 @@ footer .attribution {
   vertical-align: middle;
 }
 
-.article-preview .preview-link ul {
+.article-preview .article-link ul {
   float: right;
   max-width: 50%;
   vertical-align: top;
 }
 
-.article-preview .preview-link ul li {
+.article-preview .article-link ul li {
   font-weight: 300;
   font-size: 0.8rem;
   padding-top: 0;

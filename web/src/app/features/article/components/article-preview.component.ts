@@ -15,7 +15,7 @@ import { FavoriteButtonComponent } from './favorite-button.component';
         </app-favorite-button>
       </app-article-meta>
 
-      <a [routerLink]="['/article', article().slug]" class="preview-link">
+      <a [routerLink]="['/article', article().slug]" class="article-link">
         <h1>{{ article().title }}</h1>
         <p>{{ article().description }}</p>
         <span>Read more...</span>
