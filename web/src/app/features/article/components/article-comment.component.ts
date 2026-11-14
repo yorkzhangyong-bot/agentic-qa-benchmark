@@ -29,7 +29,7 @@ import { DefaultImagePipe } from '../../../shared/pipes/default-image.pipe';
             {{ comment.createdAt | date: 'longDate' }}
           </span>
           @if (canModify$ | async) {
-            <span class="mod-options">
+            <span class="comment-actions">
               <i class="ion-trash-a" (click)="delete.emit(true)"></i>
             </span>
           }
