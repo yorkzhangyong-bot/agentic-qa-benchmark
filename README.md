@@ -28,14 +28,14 @@ npm run setup   # install, create api/.env, generate the Prisma client, create a
 npm run dev     # API on :3000 and web app on :4200, with reload
 ```
 
-Then open http://localhost:4200 and sign in with one of the [test accounts](#test-accounts). Run `npm run db:reset` whenever you want the database back in its seeded state.
+Open http://localhost:4200 and sign in with one of the [test accounts](#test-accounts). `npm run db:reset` puts the database back in its seeded state at any time; on Windows, stop the API first.
 
 ## Scripts
 
 | Command | What it does |
 |---|---|
 | `npm run setup` | Installs both workspaces, creates `api/.env` with a random `JWT_SECRET` if it is missing, generates the Prisma client and creates or updates the schema in `api/dev.db`. If the database didn't exist yet, it also loads the seed data; an existing database keeps its data. |
-| `npm run dev` | Starts the API (`nitro dev`) and the web app (`ng serve`) together. Ctrl+C stops both. |
+| `npm run dev` | Starts the API (`nitro dev`) and the web app (`ng serve`) side by side, both with reload. Ctrl+C stops both. |
 | `npm run build` | Production builds into `api/.output/` and `web/dist/`. |
 | `npm start` | Serves the production builds: the API on :3000 and the web app on :4200 (static files with single-page-app fallback). Run `npm run build` first. |
 | `npm run db:reset` | Deletes `api/dev.db`, recreates the schema and loads the seed data. Stop the API first: on Windows the database file is locked while the API runs. |
@@ -67,6 +67,12 @@ The seed script is `api/prisma/seed.ts`.
 - `api/.env` (git-ignored, created by `npm run setup`) must define `JWT_SECRET`. Optional: `DATABASE_URL` (default `file:./dev.db`, which is `api/dev.db`), `BCRYPT_SALT_ROUNDS` (default 10) and `PORT` (default 3000).
 - The web app calls the API at `http://localhost:3000/api`, set in `web/src/app/core/interceptors/api.interceptor.ts`.
 - The API serves the seeded avatar images (`http://localhost:3000/images/...`). The Conduit theme, the Ionicons icon font and the Google fonts are served by the web app from `web/src/theme/`, so the UI looks the same offline.
+
+## Troubleshooting
+
+- `npm run db:reset` reports a locked database on Windows: stop the API first; the SQLite file is locked while it runs.
+- Port 3000 or 4200 is already in use: stop the other process, or start the two apps separately with `npm run dev -w api` and `npm run start -w web`.
+- The Prisma client is missing after a pull: run `npm run db:generate -w api`.
 
 ## CI
 
