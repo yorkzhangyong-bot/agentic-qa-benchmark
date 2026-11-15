@@ -25,5 +25,15 @@ jobs:
       # The app needs Node 22.12 or newer; the platform's default is 20.
       node_version: "24"
       app_url: ${{ vars.APP_URL }}
+      # The workflow starts the app itself: without APP_ENV for the agents, with it for the test runs. The app
+      # keeps its state in a SQLite file, so every start gets a fresh, seeded database first (the Prisma client
+      # must exist before the seed runs). The build runs once per job; a second start in the same job reuses it.
+      # JWT_SECRET is the only variable the app needs: APP_ENV may provide it, otherwise a harmless dummy does.
+      app_reset_command: 'npm run db:generate -w api && npm run db:reset'
+      app_start_command: 'export JWT_SECRET="${JWT_SECRET:-agent-dummy}" && node scripts/ensure-env.mjs && { [ -d api/.output ] && [ -d web/dist ] || npm run build; } && npm start'
+      # The API answers last: the web app is static files, served as soon as the build is there.
+      app_ready_url: http://localhost:3000/api/tags
+      app_ready_timeout: 300
     secrets:
       DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+      APP_ENV: ${{ secrets.APP_ENV }}
