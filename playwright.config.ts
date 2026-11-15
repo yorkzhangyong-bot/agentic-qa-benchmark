@@ -22,7 +22,7 @@ export default defineConfig({
       // ensure-env.mjs creates api/.env (JWT_SECRET) on a fresh checkout, as `npm run setup` would.
       command: 'node scripts/ensure-env.mjs && npm run build && npm run db:reset && npm start',
       url: 'http://localhost:3000/api/tags',
-      reuseExistingServer: !isCI,
+      reuseExistingServer: true, // the agentic-qa workflows start the app themselves and the test run must reuse it
       timeout: 180_000,
     },
     {
