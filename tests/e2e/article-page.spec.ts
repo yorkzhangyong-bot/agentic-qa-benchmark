@@ -89,7 +89,7 @@ test.describe('Article page', () => {
     await expect(page.locator('.article-page')).toContainText(
       'Sign in or sign up to add comments on this article.',
     );
-    const articlePage = page.locator('app-article-page');
+    const articlePage = page.locator('app-article-view');
     await expect(articlePage.getByRole('link', { name: 'Sign in', exact: true })).toHaveAttribute('href', '/login');
     await expect(articlePage.getByRole('link', { name: 'sign up', exact: true })).toHaveAttribute(
       'href',
