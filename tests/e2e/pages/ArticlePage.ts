@@ -1,4 +1,4 @@
-import { type Locator, type Page } from '@playwright/test';
+import { type Locator, type Page, type Response } from '@playwright/test';
 
 /** An article page: title, metadata, tags, body, comment list and comment form. */
 export class ArticlePage {
@@ -55,6 +55,19 @@ export class ArticlePage {
   async addComment(text: string): Promise<void> {
     await this.commentBox.fill(text);
     await this.postCommentButton.click();
+  }
+
+  /**
+   * Fills the comment box, posts it and resolves with the API's answer. A test that asserts only after the
+   * response has arrived cannot be satisfied by the page as it was before the post.
+   */
+  async submitComment(text: string): Promise<Response> {
+    const response = this.page.waitForResponse(
+      r => r.request().method() === 'POST' && /\/api\/articles\/[^/]+\/comments$/.test(new URL(r.url()).pathname),
+    );
+    await this.commentBox.fill(text);
+    await this.postCommentButton.click();
+    return response;
   }
 
   /** Comment card whose author is the given username. */

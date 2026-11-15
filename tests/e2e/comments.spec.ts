@@ -97,12 +97,16 @@ test.describe('Comments', () => {
     await expect(article.comments.first()).toBeVisible();
     const before = await article.comments.count();
 
-    await article.postCommentButton.click();
+    // Each post is asserted only once the API has answered it. The message from the first post is still on the
+    // page while the second one is in flight, so without the wait the checks could pass before the server
+    // had accepted or rejected the second comment.
+    const empty = await article.submitComment('');
+    expect(empty.status()).toBe(422);
     await expect(page.getByText("body can't be blank")).toBeVisible();
     await expect(article.comments).toHaveCount(before);
 
-    await article.commentBox.fill('   ');
-    await article.postCommentButton.click();
+    const spaces = await article.submitComment('   ');
+    expect(spaces.status()).toBe(422);
     await expect(page.getByText("body can't be blank")).toBeVisible();
     await expect(article.comments).toHaveCount(before);
     await expect(article.commentBox).toHaveValue('   ');
