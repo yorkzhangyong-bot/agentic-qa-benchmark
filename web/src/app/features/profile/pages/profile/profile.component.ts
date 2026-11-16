@@ -1,5 +1,12 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
-import { ActivatedRoute, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import {
+  ActivatedRoute,
+  IsActiveMatchOptions,
+  Router,
+  RouterLink,
+  RouterLinkActive,
+  RouterOutlet,
+} from '@angular/router';
 import { catchError, switchMap } from 'rxjs/operators';
 import { combineLatest, EMPTY, of } from 'rxjs';
 import { UserService } from '../../../../core/auth/services/user.service';
@@ -30,6 +37,15 @@ export class ProfileComponent implements OnInit {
   isUser = signal(false);
   errors = signal<Errors | null>(null);
   destroyRef = inject(DestroyRef);
+
+  // The tab of the list on show stays selected on every page of it: the path must match exactly, so that "My Posts"
+  // is not selected on the favourites tab, while the page number in the query string is ignored.
+  readonly tabActiveOptions: IsActiveMatchOptions = {
+    paths: 'exact',
+    queryParams: 'ignored',
+    fragment: 'ignored',
+    matrixParams: 'ignored',
+  };
 
   constructor(
     private readonly route: ActivatedRoute,
