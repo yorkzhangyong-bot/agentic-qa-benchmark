@@ -38,7 +38,7 @@
                 <a
                   class="nav-link"
                   routerLinkActive="active"
-                  [routerLinkActiveOptions]="{ exact: true }"
+                  [routerLinkActiveOptions]="tabActiveOptions"
                   [routerLink]="['/profile', p.username]"
                 >
                   My Posts
@@ -48,7 +48,7 @@
                 <a
                   class="nav-link"
                   routerLinkActive="active"
-                  [routerLinkActiveOptions]="{ exact: true }"
+                  [routerLinkActiveOptions]="tabActiveOptions"
                   [routerLink]="['/profile', p.username, 'favorites']"
                 >
                   Favorited Posts
